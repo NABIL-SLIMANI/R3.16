@@ -1,0 +1,37 @@
+
+{% extends "base/base.html.twig" %}
+
+{% block title %}Ajouter une catégorie{% endblock %}
+
+{% block body %}
+    <div class="max-w-xl mx-auto">
+        <h1 class="text-2xl font-bold mb-6">Ajouter une catégorie</h1>
+
+        <div class="card bg-base-100 shadow-md border border-base-300">
+            <div class="card-body">
+                {{ form_start(form) }}
+
+                    <div class="form-control w-full mb-4">
+                        {{ form_label(form.name, 'Nom', {'label_attr': {'class': 'label font-medium'}}) }}
+                        {{ form_widget(form.name, {'attr': {'class': 'input input-bordered w-full'}}) }}
+                        {{ form_errors(form.name) }}
+                    </div>
+
+                    <div class="form-control w-full mb-6">
+                        {{ form_label(form.color, 'Couleur', {'label_attr': {'class': 'label font-medium'}}) }}
+                        {{ form_widget(form.color, {'attr': {'class': 'input input-bordered w-full h-14'}}) }}
+                        {{ form_errors(form.color) }}
+                    </div>
+
+                    <div class="flex flex-wrap gap-3">
+                        <button class="btn btn-primary">Ajouter</button>
+                        <a href="{{ path('app_category_index') }}" class="btn btn-outline">
+                            Retour à la liste
+                        </a>
+                    </div>
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

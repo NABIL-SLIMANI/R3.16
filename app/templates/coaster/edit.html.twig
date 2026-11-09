@@ -1,0 +1,25 @@
+{% extends "base/base.html.twig" %}
+
+{% block title %}Modifier une montagne russe{% endblock %}
+
+{% block body %}
+    <div class="flex flex-col gap-4">
+        <h1 class="text-2xl font-bold">Modifier une montagne russe</h1>
+
+        {{ form_start(coasterForm) }}
+            <div class="flex flex-col gap-4">
+                {{ form_widget(coasterForm) }}
+
+                <div class="flex gap-2">
+                    <button type="submit" class="btn btn-primary">
+                        Enregistrer
+                    </button>
+
+                    <a href="{{ path('coaster_index') }}" class="btn">
+                        Annuler
+                    </a>
+                </div>
+            </div>
+        {{ form_end(coasterForm) }}
+    </div>
+{% endblock %}

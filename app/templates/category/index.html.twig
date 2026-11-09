@@ -1,0 +1,52 @@
+
+{% extends "base/base.html.twig" %}
+
+{% block title %}Liste des catégories{% endblock %}
+
+{% block body %}
+    <div class="flex items-center justify-between gap-4 mb-4">
+        <h1 class="text-2xl font-bold">Catégories</h1>
+        <a href="{{ path('app_category_new') }}" class="btn btn-primary">Ajouter</a>
+    </div>
+
+    {% if categories is empty %}
+        <p>Aucune catégorie enregistrée.</p>
+    {% else %}
+        <div class="overflow-x-auto">
+            <table class="table table-zebra">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Couleur</th>
+                        <th>Aperçu</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for category in categories %}
+                        <tr>
+                            <td>{{ category.name }}</td>
+                            <td>{{ category.color }}</td>
+                            <td>
+                                <span
+                                    class="inline-block w-6 h-6 rounded border"
+                                    style="background-color: {{ category.color }};"
+                                ></span>
+                            </td>
+                            <td>
+                                <a href="{{ path('app_category_edit', {'id': category.id}) }}"
+                                   class="btn btn-sm btn-primary">
+                                    Modifier
+                                </a>
+                                <a href="{{ path('app_category_show', {'id': category.id}) }}"
+                                   class="btn btn-sm btn-outline">
+                                    Voir
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -17,7 +17,10 @@
         "doctrine/doctrine-bundle": "^3.3",
         "doctrine/doctrine-migrations-bundle": "^4.0",
         "doctrine/orm": "^3.6",
-        "symfony/webpack-encore-bundle": "^2.4"
+        "symfony/webpack-encore-bundle": "^2.4",
+        "symfony/form": "8.1.*",
+        "symfony/validator": "8.1.*",
+        "symfony/security-csrf": "8.1.*"
     },
     "config": {
         "allow-plugins": {
@@ -33,7 +36,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": true,
-            "require": "8.2.*"
+            "require": "8.1.*"
         }
     },
     "scripts": {
@@ -43,8 +46,8 @@
         }
     },
     "require-dev": {
-        "symfony/stopwatch": "8.2.*",
-        "symfony/web-profiler-bundle": "8.2.*",
+        "symfony/stopwatch": "8.1.*",
+        "symfony/web-profiler-bundle": "8.1.*",
         "symfony/maker-bundle": "*"
     }
 }

@@ -1,0 +1,44 @@
+{% extends 'base/base.html.twig' %}
+
+{% block title %}Voir un parc{% endblock %}
+
+{% block body %}
+    <div class="flex flex-col gap-4">
+        <h1 class="text-2xl font-bold">Détails du parc</h1>
+
+        <div class="overflow-x-auto">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ park.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nom</th>
+                        <td>{{ park.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Pays</th>
+                        <td>{{ park.country }}</td>
+                    </tr>
+                    <tr>
+                        <th>Année d'ouverture</th>
+                        <td>{{ park.openingYear }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="flex flex-wrap gap-2">
+            <a href="{{ path('app_park_index') }}" class="btn">
+                Retour à la liste
+            </a>
+
+            <a href="{{ path('app_park_edit', {'id': park.id}) }}" class="btn btn-primary">
+                Modifier
+            </a>
+
+            {{ include('park/_delete_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}

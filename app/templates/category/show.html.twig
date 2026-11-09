@@ -1,0 +1,46 @@
+
+{% extends "base/base.html.twig" %}
+
+{% block title %}Voir une catégorie{% endblock %}
+
+{% block body %}
+    <div class="max-w-xl mx-auto">
+        <h1 class="text-2xl font-bold mb-6">Détails de la catégorie</h1>
+
+        <div class="card bg-base-100 shadow-md border border-base-300">
+            <div class="card-body">
+                <div class="overflow-x-auto">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th class="w-32">ID</th>
+                                <td>{{ category.id }}</td>
+                            </tr>
+                            <tr>
+                                <th>Nom</th>
+                                <td>{{ category.name }}</td>
+                            </tr>
+                            <tr>
+                                <th>Couleur</th>
+                                <td>
+                                    <div class="w-20 h-14 rounded-lg border border-base-300"
+                                         style="background-color: {{ category.color }};">
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="flex flex-wrap gap-3 mt-4">
+                    <a href="{{ path('app_category_edit', {'id': category.id}) }}" class="btn btn-primary">
+                        Modifier
+                    </a>
+                    <a href="{{ path('app_category_index') }}" class="btn btn-outline">
+                        Retour à la liste
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

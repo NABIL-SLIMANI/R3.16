@@ -1,0 +1,20 @@
+{% extends "base/base.html.twig" %}
+
+{% block title %}Modifier un parc{% endblock %}
+
+{% block body %}
+    <div class="flex items-center justify-between gap-4 mb-4">
+        <h1 class="text-2xl font-bold">Modifier un parc</h1>
+        <a href="{{ path('app_park_index') }}" class="btn">
+            Retour à la liste
+        </a>
+    </div>
+
+    <div class="max-w-xl">
+        {{ include('park/_form.html.twig', {'button_label': 'Enregistrer les modifications'}) }}
+    </div>
+
+    <div class="mt-6">
+        {{ include('park/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

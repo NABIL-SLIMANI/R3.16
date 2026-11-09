@@ -1,0 +1,14 @@
+{{ form_start(form) }}
+    <div class="flex flex-col gap-4">
+        {{ form_widget(form) }}
+
+        <div class="flex gap-2">
+            <button class="btn btn-primary">
+                {{ button_label|default('Enregistrer') }}
+            </button>
+            <a href="{{ path('app_park_index') }}" class="btn">
+                Annuler
+            </a>
+        </div>
+    </div>
+{{ form_end(form) }}

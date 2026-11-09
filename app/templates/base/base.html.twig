@@ -1,0 +1,64 @@
+ 
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Wiki Coaster{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🎢</text></svg>">
+
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+
+        {% set frankenphp_hot_reload = app.request.server.get('FRANKENPHP_HOT_RELOAD') %}
+        {% if frankenphp_hot_reload %}
+            <meta name="frankenphp-hot-reload:url" content="{{ frankenphp_hot_reload }}">
+            <script src="https://cdn.jsdelivr.net/npm/idiomorph"></script>
+            <script src="https://cdn.jsdelivr.net/npm/frankenphp-hot-reload/+esm" type="module"></script>
+        {% endif %}
+    </head>
+
+    <body>
+        <main class="flex flex-nowrap h-[100vh]">
+            <aside class="flex flex-col shrink-0 w-[240px] bg-base-200 shadow">
+                <div class="py-2 bg-primary text-center text-white">
+                    <a href="{{ path('coaster_index') }}" class="text-xl">
+                        <i class="bi bi-roller-coaster"></i>
+                        Wiki Coaster
+                    </a>
+                </div>
+
+                <ul class="menu w-full p-4 gap-2">
+                    <li>
+                        <a href="{{ path('coaster_index') }}">
+                            <i class="bi bi-list-ul text-lg"></i>
+                            Montagnes russes
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_park_index') }}">
+                            <i class="bi bi-tree text-lg"></i>
+                            Parcs
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_category_index') }}">
+                            <i class="bi bi-tags text-lg"></i>
+                            Catégories
+                        </a>
+                    </li>
+                </ul>
+            </aside>
+
+            <div class="flex-1">
+                <div class="bg-base-200 p-2 rounded-xs border border-base-300">
+                    {% block body %}{% endblock %}
+                </div>
+            </div>
+        </main>
+    </body>
+</html>

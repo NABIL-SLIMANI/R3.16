@@ -1,0 +1,43 @@
+
+{% extends "base/base.html.twig" %}
+
+{% block title %}Liste des parcs{% endblock %}
+
+{% block body %}
+    <div class="flex items-center justify-between gap-4 mb-4">
+        <h1 class="text-2xl font-bold">Parcs</h1>
+        <a href="{{ path('app_park_new') }}" class="btn btn-primary">Ajouter</a>
+    </div>
+
+    {% if parks is empty %}
+        <p>Aucun parc enregistré.</p>
+    {% else %}
+        <div class="overflow-x-auto">
+            <table class="table table-zebra">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Pays</th>
+                        <th>Année d'ouverture</th>
+                        <th>Nombre de montagnes russes</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for park in parks %}
+                        <tr>
+                            <td>{{ park.name }}</td>
+                            <td>{{ park.country }}</td>
+                            <td>{{ park.openingYear ?? '-' }}</td>
+                            <td>{{ park.coasters|length }}</td>
+                            <td>
+                                <a href="{{ path('app_park_show', {'id': park.id}) }}" class="btn btn-sm">Voir</a>
+                                <a href="{{ path('app_park_edit', {'id': park.id}) }}" class="btn btn-sm btn-primary">Modifier</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+{% endblock %}

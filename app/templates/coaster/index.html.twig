@@ -1,0 +1,91 @@
+{% extends "base/base.html.twig" %}
+
+{% block title %}Liste des montagnes russes{% endblock %}
+
+{% block body %}
+    <div class="flex items-center justify-between gap-4 mb-4">
+        <h1 class="text-2xl font-bold">Montagnes russes</h1>
+        <a href="{{ path('coaster_add') }}" class="btn btn-primary">Ajouter</a>
+    </div>
+
+    <form method="get" action="{{ path('coaster_index') }}" class="bg-base-200 p-4 rounded-box mb-6">
+        <h2 class="text-lg font-bold mb-3">Filtrer les montagnes russes</h2>
+
+        <div class="flex flex-wrap items-end gap-4">
+            <div class="form-control">
+                <label for="park" class="label">
+                    <span class="label-text">Parc</span>
+                </label>
+                <select name="park" id="park" class="select select-bordered">
+                    <option value="">Tous les parcs</option>
+                    {% for park in parks %}
+                        <option value="{{ park.id }}" {% if selectedPark == park.id ~ '' %}selected{% endif %}>
+                            {{ park.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-control">
+                <label for="category" class="label">
+                    <span class="label-text">Catégorie</span>
+                </label>
+                <select name="category" id="category" class="select select-bordered">
+                    <option value="">Toutes les catégories</option>
+                    {% for category in categories %}
+                        <option value="{{ category.id }}" {% if selectedCategory == category.id ~ '' %}selected{% endif %}>
+                            {{ category.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Filtrer</button>
+            <a href="{{ path('coaster_index') }}" class="btn btn-ghost">Réinitialiser</a>
+        </div>
+    </form>
+
+    {% if coasters is empty %}
+        <p>Aucune montagne russe ne correspond aux filtres sélectionnés.</p>
+    {% else %}
+        <div class="overflow-x-auto">
+            <table class="table table-zebra">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Vitesse maximale</th>
+                        <th>Longueur</th>
+                        <th>Hauteur maximale</th>
+                        <th>En fonctionnement</th>
+                        <th>Parc</th>
+                        <th>Catégories</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for coaster in coasters %}
+                        <tr>
+                            <td>{{ coaster.name }}</td>
+                            <td>{{ coaster.maxSpeed }}</td>
+                            <td>{{ coaster.length }}</td>
+                            <td>{{ coaster.maxHeight }}</td>
+                            <td>{{ coaster.operating ? 'Oui' : 'Non' }}</td>
+                            <td>{{ coaster.park ? coaster.park.name : '-' }}</td>
+                            <td>
+                                {% for category in coaster.categories %}
+                                    <span class="badge">{{ category.name }}</span>
+                                {% else %}
+                                    -
+                                {% endfor %}
+                            </td>
+                            <td>
+                                <a href="{{ path('coaster_edit', {'id': coaster.id}) }}" class="btn btn-sm btn-primary">Modifier</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+        {% include "utils/_pagination.html.twig" %}
+{% endblock %}
